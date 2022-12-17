@@ -27,4 +27,9 @@ class Product extends Model
     {
         return $this->BelongsToMany(File::class, 'files_modules')->withTimestamps();
     }
+
+   public function type_variations()
+    {
+        return $this->BelongsToMany(TypeVariation::class, 'products_type_variations')->withTimestamps();
+    } 
 }

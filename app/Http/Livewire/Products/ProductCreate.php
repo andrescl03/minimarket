@@ -27,10 +27,10 @@ class ProductCreate extends Component
     public $category;
     public $delivery = 0;
     public $files = [];
-    public $type_variation;
+    public $type_variation = [];
     public $type_variations;
 
-    protected $listeners = [ 'click'];
+    protected $listeners = ['click'];
 
     public function render()
     {
@@ -54,21 +54,10 @@ class ProductCreate extends Component
         ]);
     }
 
-
-    public function addTypevariation(){
-
-        dd("ea");
-    }
-    public function click(){
-
-        $this->emit('verificar');
-
-        $this->dispatchBrowserEvent('show',['data' => $this->type_variation]);
-
-
-    }
     public function submit()
     {
+
+
         $this->name = trim($this->name);
         $this->slug = Str::slug($this->name);
 
@@ -82,7 +71,8 @@ class ProductCreate extends Component
                 'sku' => $this->sku,
                 'stock' => $this->stock,
                 'photo' => $this->photo,
-                'files' => $this->files
+                'files' => $this->files,
+                'type_variation' => $this->type_variation
             ],
             [
                 'name' => ['required', 'min:2', 'string', 'unique:products,name', 'max:255'],
@@ -93,9 +83,13 @@ class ProductCreate extends Component
                 'sku' => ['required'],
                 'stock' => ['required'],
                 'photo' => ['image'],
-                'files' => ['required']
+                'files' => ['required'],
+                'type_variation.*' => ['required']
             ]
         );
+
+
+
 
         if ($validator->fails()) {
             $this->dispatchBrowserEvent('show-message');
@@ -117,6 +111,10 @@ class ProductCreate extends Component
                 'category_id' => $this->category
             ]
         );
+        foreach ($this->type_variation as $variation) {
+
+            $product->type_variations()->attach(1, array('description' => $variation['product_option_value']));
+        }
 
         foreach ($this->files as  $file) {
             $fileUPload = $file->store('photos');
@@ -132,5 +130,4 @@ class ProductCreate extends Component
             $product->files()->attach($file->id);
         }
     }
- 
 }

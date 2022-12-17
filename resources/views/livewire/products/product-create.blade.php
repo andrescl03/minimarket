@@ -2,7 +2,7 @@
     @section('titulo')
         <h2>Registro de nuevo producto</h2>
     @endsection
-    <div x-data class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <div x-data="" class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
             <!--begin::Form-->
@@ -506,8 +506,8 @@
                                                 <!--end::Form group-->
                                                 <!--begin::Form group-->
                                                 <div class="form-group mt-5">
-                                                    <button @click="$wire.  ()" type="button" data-repeater-create=""
-                                                        class="btn btn-sm btn-light-primary">
+                                                    <button {{-- @click="addSelectVariation()" --}} type="button"
+                                                        data-repeater-create="" class="btn btn-sm btn-light-primary">
                                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
                                                         <span class="svg-icon svg-icon-2">
                                                             <svg width="24" height="24" viewBox="0 0 24 24"
@@ -583,7 +583,8 @@
                             class="btn btn-light me-5">Cancelar</a>
                         <!--end::Button-->
                         <!--begin::Button-->
-                        <button id="kt_ecommerce_add_product_submit" type="submit" class="btn btn-primary">
+                        <button @click="addSelectVariation()" id="kt_ecommerce_add_product_submit" type="submit"
+                            class="btn btn-primary">
                             <span class="indicator-label">Registrar</span>
                             <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -600,11 +601,9 @@
     @push('scripts')
         @vite('resources/js/products/create-product.js')
         <script>
-            Livewire.on('verificar' , () => {
-                console.log("xd");
-              @this.set('type_variation', $('#kt_ecommerce_add_product_options').repeaterVal())
-
-            });
+            function addSelectVariation() {
+                @this.set('type_variation', $('#kt_ecommerce_add_product_options').repeaterVal())
+            }
         </script>
     @endpush
 </div>

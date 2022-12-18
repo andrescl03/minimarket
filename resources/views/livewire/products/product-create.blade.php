@@ -102,7 +102,7 @@
                         <div class="card-body pt-0">
                             <!--begin::Select2-->
                             <select class="form-select mb-2" data-control="select2" data-hide-search="true"
-                                data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select" wire:model.defer="state">
+                                data-placeholder="Seleccione una opción" id="kt_ecommerce_add_product_status_select" wire:model.defer="state">
                                 @foreach ($states as $state)
                                     <option value="{{ $state->id }}">{{ $state->name }}</option>
                                 @endforeach
@@ -111,6 +111,10 @@
                             <!--begin::Description-->
                             <div class="text-muted fs-7">Establezca el estado del producto.</div>
                             <!--end::Description-->
+                            @error('state')
+                                <span class="error text-danger">{{ $message }}</span>
+                            @enderror
+                           
                             <!--begin::Datepicker-->
                             <div class="d-none mt-10">
                                 <label for="kt_ecommerce_add_product_status_datepicker" class="form-label">Select
@@ -173,14 +177,14 @@
                             <!--end::Button-->
                             <!--begin::Input group-->
                             <!--begin::Label-->
-                            <label class="form-label d-block">Etiquetas</label>
+                           {{--  <label class="form-label d-block">Etiquetas</label>
                             <!--end::Label-->
                             <!--begin::Input-->
                             <input id="kt_ecommerce_add_product_tags" name="kt_ecommerce_add_product_tags"
                                 class="form-control mb-2" />
                             <!--end::Input-->
                             <!--begin::Description-->
-                            <div class="text-muted fs-7">Agregue etiquetas al producto.</div>
+                            <div class="text-muted fs-7">Agregue etiquetas al producto.</div> --}}
                             <!--end::Description-->
                             <!--end::Input group-->
                         </div>
@@ -324,23 +328,6 @@
                                         <!--begin::Input group-->
                                         <div class="mb-8 fv-row">
                                             <!--begin::Label-->
-                                            <label class="required form-label">Precio de venta sugerido
-                                                para el público</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <input type="text" name="price" class="form-control mb-2"
-                                                placeholder="Precio de venta sugerido" wire:model.defer="purcharse" />
-                                            <!--end::Input-->
-                                            <!--begin::Description-->
-                                            <div class="text-muted fs-7">Establecer el precio sugerido del producto.
-                                            </div>
-                                            @error('sale_suggested')
-                                                <span class="error text-danger">{{ $message }}</span>
-                                            @enderror
-                                            <!--end::Description-->
-                                        </div>
-                                        <div class="mb-8 fv-row">
-                                            <!--begin::Label-->
                                             <label class="required form-label">Precio de compra</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
@@ -355,6 +342,25 @@
                                             @error('purcharse')
                                                 <span class="error text-danger">{{ $message }}</span>
                                             @enderror
+                                        </div>
+                                        
+                                        
+                                        <div class="mb-8 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="required form-label">Precio de venta sugerido
+                                                para el público</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="price" class="form-control mb-2"
+                                                placeholder="Precio de venta sugerido" wire:model.defer="purcharse" />
+                                            <!--end::Input-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">Establecer el precio sugerido del producto.
+                                            </div>
+                                            @error('sale_suggested')
+                                                <span class="error text-danger">{{ $message }}</span>
+                                            @enderror
+                                            <!--end::Description-->
                                         </div>
                                         <!--end::Input group-->
 
@@ -396,21 +402,7 @@
                                             <!--end::Description-->
                                         </div>
                                         <!--end::Input group-->
-                                        <!--begin::Input group-->
-                                        <div class="mb-10 fv-row">
-                                            <!--begin::Label-->
-                                            <label class="form-label">Código de Barras</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <input type="text" name="sku" class="form-control mb-2"
-                                                placeholder="Código de Barras" />
-                                            <!--end::Input-->
-                                            <!--begin::Description-->
-                                            <div class="text-muted fs-7">Enter the product barcode number.</div>
-                                            <!--end::Description-->
-                                        </div>
-                                        <!--end::Input group-->
-                                        <!--begin::Input group-->
+                                         <!--begin::Input group-->
                                         <div class="mb-10 fv-row">
                                             <!--begin::Label-->
                                             <label class="required form-label">Cantidad</label>

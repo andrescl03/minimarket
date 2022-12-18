@@ -8,8 +8,8 @@
                             <span class="svg-icon svg-icon-1 position-absolute ms-6">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
-                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2"
-                                        rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
+                                        transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
                                     <path
                                         d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
                                         fill="currentColor" />
@@ -25,10 +25,9 @@
                                 <span class="svg-icon svg-icon-2">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
-                                        <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2"
-                                            rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
-                                        <rect x="4.36396" y="11.364" width="16" height="2" rx="1"
-                                            fill="currentColor" />
+                                        <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
+                                            transform="rotate(-90 11.364 20.364)" fill="currentColor" />
+                                        <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
                                     </svg>
                                 </span>
                                 Nuevo producto
@@ -56,50 +55,47 @@
                             </thead>
                             <tbody class=" text-center text-gray-600 fw-semibold">
                                 @foreach ($products as $product)
-                                    <tr>
-                                        <td>
-                                            <span>{{ $product->name }}</span>
-                                        </td>
-                                        <td>
-                                            @forelse  ($product->files as $file)
-                                                @if ($loop->last)
-                                                    <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                                        <a target="_blank"
-                                                            href="{{ asset('storage') }}/{{ $file->url }}">
-                                                            <div class="symbol-label">
-                                                                <img src="{{ asset('storage') }}/{{ $file->url }}"
-                                                                    alt="{{ $file->name }}" class="w-100" />
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                @endif
-                                            @empty
-                                                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                                    <a>
-                                                        <div class="symbol-label fs-3  bg-light-success text-primary">
-                                                            {{ Str::upper(substr($product->name, 0, 1)) }}
-                                                        </div>
-                                                    </a>
+                                <tr>
+                                    <td>
+                                        <span>{{ $product->name }}</span>
+                                    </td>
+                                    <td>
+                                        @if($product->photo)
+                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                            <a target="_blank" href="{{ asset('storage') }}/{{ $product->photo }}">
+                                                <div class="symbol-label">
+                                                    <img src="{{ asset('storage') }}/{{ $product->photo }}"
+                                                        alt="{{ $product->name }}" class="w-100" />
                                                 </div>
-                                            @endforelse
-                                        </td>
-                                        <td>{{ $product->sku }}</td>
-                                        <td>{{ $product->sale_suggested }}</td>
-                                        <td>{{ $product->purcharse }}</td>
-                                        @if ($product->stock <= 5)
-                                            <td class="pe-0">
-                                                <span class="badge badge-light-warning">Bajo stock</span>
-                                                <span class="fw-bold text-warning ms-3">{{ $product->stock }}</span>
-                                            </td>
-                                        @elseif ($product->stock > 5)
-                                            <td>
-                                                <span class="fw-bold text-success ms-3">{{ $product->stock }}</span>
-                                            </td>
+                                            </a>
+                                        </div>
                                         @else
-                                            <td class="pe-0">
-                                                <span class="badge badge-light-danger">Sin stock</span>
-                                                <span class="fw-bold text-success ms-3">{{ $product->stock }}</span>
-                                            </td>
+                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                            <a>
+                                                <div class="symbol-label fs-3  bg-light-success text-primary">
+                                                    {{ Str::upper(substr($product->name, 0, 1)) }}
+                                                </div>
+                                            </a>
+                                        </div>
+                                        @endif
+                                    </td>
+                                    <td>{{ $product->sku }}</td>
+                                    <td>{{ $product->sale_suggested }}</td>
+                                    <td>{{ $product->purcharse }}</td>
+                                    @if ($product->stock <= 5)
+                                     <td>
+                                        <span class="badge badge-light-warning">Bajo stock</span>
+                                        <span class="fw-bold text-warning ms-3">{{ $product->stock }}</span>
+                                        </td>
+                                        @elseif ($product->stock > 5)
+                                        <td>
+                                            <span class="fw-bold text-success ms-3">{{ $product->stock }}</span>
+                                        </td>
+                                        @else
+                                        <td>
+                                            <span class="badge badge-light-danger">Sin stock</span>
+                                            <span class="fw-bold text-success ms-3">{{ $product->stock }}</span>
+                                        </td>
                                         @endif
                                         <td>{{ $product->category->name }}</td>
                                         <td>
@@ -111,18 +107,18 @@
                                                 {{ $product->updated_at->diffForHumans() }}</div>
                                         </td>
                                         <td>
-                                            @if ($product->state->name == 'publicado')
-                                                <div class="badge badge-light-success fw-bold">
-                                                    {{ $product->state->name }}</div>
-                                            @elseif ($product->state->name == 'Borrador')
-                                                <div class="badge badge-light-primary fw-bold">
-                                                    {{ $product->state->name }}</div>
-                                            @elseif ($product->state->name == 'Programada')
-                                                <div class="badge badge-light-warning fw-bold">
-                                                    {{ $product->state->name }}</div>
+                                            @if (Str::upper($product->state->name) == 'PUBLICADO')
+                                            <div class="badge badge-light-success fw-bold">
+                                                {{ $product->state->name }}</div>
+                                            @elseif (Str::upper($product->state->name) == 'BORRADOR')
+                                            <div class="badge badge-light-primary fw-bold">
+                                                {{ $product->state->name }}</div>
+                                            @elseif (Str::upper($product->state->name) == 'PROGRAMADA')
+                                            <div class="badge badge-light-warning fw-bold">
+                                                {{ $product->state->name }}</div>
                                             @else
-                                                <div class="badge badge-light-danger fw-bold">
-                                                    {{ $product->state->name }}</div>
+                                            <div class="badge badge-light-danger fw-bold">
+                                                {{ $product->state->name }}</div>
                                             @endif
                                         </td>
                                         <td class="text-end">
@@ -130,8 +126,8 @@
                                                 data-kt-menu-trigger="click"
                                                 data-kt-menu-placement="bottom-end">Acciones
                                                 <span class="svg-icon svg-icon-5 m-0">
-                                                    <svg width="24" height="24" viewBox="0 0 24 24"
-                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
                                                         <path
                                                             d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
                                                             fill="currentColor" />
@@ -152,7 +148,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                    </tr>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>

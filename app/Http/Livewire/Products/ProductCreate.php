@@ -25,7 +25,7 @@ class ProductCreate extends Component
     public $purcharse;
     public $sale_suggested;
     public $stock;
-    public $state;
+    public $state = 1;
     public $category;
     public $delivery = 0;
     public $files = [];
@@ -93,7 +93,8 @@ class ProductCreate extends Component
                 'sku' => $this->sku,
                 'stock' => $this->stock,
                 'photo' => $this->photo,
-                'type_variation' => $this->type_variation
+                'type_variation' => $this->type_variation,
+                'state' => $this->state
             ],
             [
                 'name' => ['required', 'min:2', 'string', 'unique:products,name', 'max:255'],
@@ -104,7 +105,7 @@ class ProductCreate extends Component
                 'sku' => ['required'],
                 'stock' => ['required'],
                 'photo' => ['image'],
-
+                'state' => ['required'],
                 'type_variation.*' => ['required']
             ]
         );
@@ -131,13 +132,11 @@ class ProductCreate extends Component
             ]
         );
 
-
         if (isset($this->type_variation['kt_ecommerce_add_product_options'])) {
             foreach ($this->type_variation['kt_ecommerce_add_product_options'] as $variation) {
                 $product->type_variations()->attach($variation['product_option'], array('description' => $variation['product_option_value']));
             }
         }
-
         foreach ($this->files as  $file) {
             $fileUPload = $file->store('photos');
             $file = File::create(

@@ -22,9 +22,10 @@ return new class extends Migration
             $table->string('sku');
             $table->decimal('purcharse', 5, 2);
             $table->decimal('sale_suggested', 5, 2);
-            $table->decimal('stock', 10, 2);
+            $table->integer('stock');
             $table->integer('delivery');
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('state_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

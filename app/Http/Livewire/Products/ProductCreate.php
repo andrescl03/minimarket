@@ -6,6 +6,7 @@ use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
 use App\Models\File;
+use App\Models\State;
 use App\Models\TypeVariation;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -24,18 +25,40 @@ class ProductCreate extends Component
     public $purcharse;
     public $sale_suggested;
     public $stock;
+    public $state;
     public $category;
     public $delivery = 0;
     public $files = [];
     public $type_variation = [];
+    public $states;
     public $type_variations;
 
     protected $listeners = ['click'];
 
+    private function resetInput()
+    {
+        $this->photo = null;
+        $this->name = null;
+        $this->sku = null;
+        $this->description = null;
+        $this->purcharse = null;
+        $this->sale_suggested = null;
+        $this->stock = null;
+        $this->category = null;
+        $this->delivery = 0;
+        $this->files = [];
+        $this->type_variation = [];
+    }
+
+    public function mount()
+    {
+        $this->categories = Category::all();
+        $this->type_variations = TypeVariation::all();
+        $this->states = State::all();
+    }
+
     public function render()
     {
-        $this->categories = Category::get();
-        $this->type_variations = TypeVariation::get();
         return view('livewire.products.product-create')->extends('admin.layouts.main')->section('content');
     }
 
@@ -57,7 +80,6 @@ class ProductCreate extends Component
     public function submit()
     {
 
-
         $this->name = trim($this->name);
         $this->slug = Str::slug($this->name);
 
@@ -71,7 +93,6 @@ class ProductCreate extends Component
                 'sku' => $this->sku,
                 'stock' => $this->stock,
                 'photo' => $this->photo,
-                'files' => $this->files,
                 'type_variation' => $this->type_variation
             ],
             [
@@ -83,13 +104,10 @@ class ProductCreate extends Component
                 'sku' => ['required'],
                 'stock' => ['required'],
                 'photo' => ['image'],
-                'files' => ['required'],
+
                 'type_variation.*' => ['required']
             ]
         );
-
-
-
 
         if ($validator->fails()) {
             $this->dispatchBrowserEvent('show-message');
@@ -108,12 +126,16 @@ class ProductCreate extends Component
                 'sku' => $this->sku,
                 'stock' => $this->stock,
                 'delivery' => $this->delivery,
-                'category_id' => $this->category
+                'category_id' => $this->category,
+                'state_id' => $this->state
             ]
         );
-        foreach ($this->type_variation as $variation) {
 
-            $product->type_variations()->attach(1, array('description' => $variation['product_option_value']));
+
+        if (isset($this->type_variation['kt_ecommerce_add_product_options'])) {
+            foreach ($this->type_variation['kt_ecommerce_add_product_options'] as $variation) {
+                $product->type_variations()->attach($variation['product_option'], array('description' => $variation['product_option_value']));
+            }
         }
 
         foreach ($this->files as  $file) {
@@ -129,5 +151,12 @@ class ProductCreate extends Component
             );
             $product->files()->attach($file->id);
         }
+
+        $message = 'Se registró correctamente el producto';
+
+        $this->resetInput();
+        $this->dispatchBrowserEvent('show-notification', [
+            'title' => $message
+        ]);
     }
 }

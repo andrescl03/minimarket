@@ -102,16 +102,14 @@
                         <div class="card-body pt-0">
                             <!--begin::Select2-->
                             <select class="form-select mb-2" data-control="select2" data-hide-search="true"
-                                data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select">
-                                <option></option>
-                                <option value="publicado" selected="selected">Publicado</option>
-                                <option value="draft">Draft</option>
-                                <option value="scheduled">Scheduled</option>
-                                <option value="inactive">Inactive</option>
+                                data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select" wire:model.defer="state">
+                                @foreach ($states as $state)
+                                    <option value="{{ $state->id }}">{{ $state->name }}</option>
+                                @endforeach
                             </select>
                             <!--end::Select2-->
                             <!--begin::Description-->
-                            <div class="text-muted fs-7">Set the product status.</div>
+                            <div class="text-muted fs-7">Establezca el estado del producto.</div>
                             <!--end::Description-->
                             <!--begin::Datepicker-->
                             <div class="d-none mt-10">
@@ -465,7 +463,7 @@
                                                             <!--begin::Select2-->
                                                             <div class="w-100 w-md-200px">
                                                                 <select class="form-select" name="product_option"
-                                                                    data-placeholder="Select a variation"
+                                                                    data-placeholder="Seleccione una variación  "
                                                                     data-kt-ecommerce-catalog-add-product="product_option">
                                                                     <option></option>
                                                                     @foreach ($type_variations as $type_variation)
@@ -604,6 +602,38 @@
             function addSelectVariation() {
                 @this.set('type_variation', $('#kt_ecommerce_add_product_options').repeaterVal())
             }
+
+            window.addEventListener('show-notification', event => {
+
+                Swal.fire({
+                    title: event.detail.title,
+                    text: '¿Desea registrar otro producto?',
+                    icon: "success",
+                    showCancelButton: true,
+                    confirmButtonText: "Sí, continuar registrando otro producto",
+                    cancelButtonText: "No, regresar a la lista de productos",
+                    reverseButtons: true
+                }).then(function(result) {
+                    if (result.value) {
+                        Swal.fire(
+                            "IMPORTANTE",
+                            "Por favor, ingrese nuevamente los campos solicitados para registrar.",
+                            "success"
+                        )
+                    } else if (result.dismiss === "cancel") {
+                        Swal.fire(
+                            "saliendo...",
+                            "Regresando al listado de productos",
+                            "warning"
+                        )
+                        window.location.href = "{{ route('products.index') }}";
+
+
+                    }
+                });
+
+
+            });
         </script>
     @endpush
 </div>

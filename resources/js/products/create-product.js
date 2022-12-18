@@ -125,30 +125,31 @@ var KTAppEcommerceSaveProduct = function () {
             const value = e.target.value;
 
             switch (value) {
-                case "publicado": {
+                case "1": {
                     target.classList.remove(...statusClasses);
                     target.classList.add('bg-success');
                     hideDatepicker();
                     break;
                 }
-                case "scheduled": {
-                    target.classList.remove(...statusClasses);
-                    target.classList.add('bg-warning');
-                    showDatepicker();
-                    break;
-                }
-                case "inactive": {
-                    target.classList.remove(...statusClasses);
-                    target.classList.add('bg-danger');
-                    hideDatepicker();
-                    break;
-                }
-                case "draft": {
+                case "2": {
                     target.classList.remove(...statusClasses);
                     target.classList.add('bg-primary');
                     hideDatepicker();
                     break;
                 }
+                case "3": {
+                    target.classList.remove(...statusClasses);
+                    target.classList.add('bg-warning');
+                    showDatepicker();
+                    break;
+                }
+                case "4": {
+                    target.classList.remove(...statusClasses);
+                    target.classList.add('bg-danger');
+                    hideDatepicker();
+                    break;
+                }
+           
                 default:
                     break;
             }

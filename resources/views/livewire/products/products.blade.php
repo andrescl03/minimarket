@@ -42,12 +42,11 @@
                             <thead>
                                 <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                                     <th class="text-center min-w-100px">Nombre</th>
-                                    <th class="text-center min-w-100px">Imágenes</th>
+                                    <th class="text-center min-w-100px">Imagen</th>
                                     <th class="text-center min-w-100px">SKU</th>
-                                    <th class="text-center min-w-100px">Descripción</th>
                                     <th class="text-center min-w-100px">Precio de venta sugerido</th>
                                     <th class="text-center min-w-100px">Precio de compra</th>
-                                    <th class="text-center min-w-100px">Stock</th>
+                                    <th class="text-center min-w-100px">Cantidad disponible</th>
                                     <th class="text-center min-w-100px">Categoría</th>
                                     <th class="text-center min-w-100px">Fecha de registro</th>
                                     <th class="text-center min-w-100px">Fecha de actualización</th>
@@ -56,11 +55,13 @@
                                 </tr>
                             </thead>
                             <tbody class=" text-center text-gray-600 fw-semibold">
-                                @foreach ($products as $category)
+                                @foreach ($products as $product)
                                     <tr>
-                                        <td> {{ $category->name }}</td>
                                         <td>
-                                            @forelse  ($category->files as $file)
+                                            <span>{{ $product->name }}</span>
+                                        </td>
+                                        <td>
+                                            @forelse  ($product->files as $file)
                                                 @if ($loop->last)
                                                     <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
                                                         <a target="_blank"
@@ -76,23 +77,53 @@
                                                 <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
                                                     <a>
                                                         <div class="symbol-label fs-3  bg-light-success text-primary">
-                                                            {{ Str::upper(substr($category->name, 0, 1)) }}
+                                                            {{ Str::upper(substr($product->name, 0, 1)) }}
                                                         </div>
                                                     </a>
                                                 </div>
                                             @endforelse
                                         </td>
-                                        <td>{{ $category->description }}</td>
+                                        <td>{{ $product->sku }}</td>
+                                        <td>{{ $product->sale_suggested }}</td>
+                                        <td>{{ $product->purcharse }}</td>
+                                        @if ($product->stock <= 5)
+                                            <td class="pe-0">
+                                                <span class="badge badge-light-warning">Bajo stock</span>
+                                                <span class="fw-bold text-warning ms-3">{{ $product->stock }}</span>
+                                            </td>
+                                        @elseif ($product->stock > 5)
+                                            <td>
+                                                <span class="fw-bold text-success ms-3">{{ $product->stock }}</span>
+                                            </td>
+                                        @else
+                                            <td class="pe-0">
+                                                <span class="badge badge-light-danger">Sin stock</span>
+                                                <span class="fw-bold text-success ms-3">{{ $product->stock }}</span>
+                                            </td>
+                                        @endif
+                                        <td>{{ $product->category->name }}</td>
                                         <td>
                                             <div class="badge badge-light fw-bold">
-                                                {{ $category->created_at->diffForHumans() }}</div>
+                                                {{ $product->created_at->diffForHumans() }}</div>
                                         </td>
                                         <td>
                                             <div class="badge badge-light fw-bold">
-                                                {{ $category->updated_at->diffForHumans() }}</div>
+                                                {{ $product->updated_at->diffForHumans() }}</div>
                                         </td>
                                         <td>
-                                            <div class="badge badge-light-success fw-bold">Disponible</div>
+                                            @if ($product->state->name == 'publicado')
+                                                <div class="badge badge-light-success fw-bold">
+                                                    {{ $product->state->name }}</div>
+                                            @elseif ($product->state->name == 'Borrador')
+                                                <div class="badge badge-light-primary fw-bold">
+                                                    {{ $product->state->name }}</div>
+                                            @elseif ($product->state->name == 'Programada')
+                                                <div class="badge badge-light-warning fw-bold">
+                                                    {{ $product->state->name }}</div>
+                                            @else
+                                                <div class="badge badge-light-danger fw-bold">
+                                                    {{ $product->state->name }}</div>
+                                            @endif
                                         </td>
                                         <td class="text-end">
                                             <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
@@ -111,11 +142,11 @@
                                                 data-kt-menu="true">
                                                 <div class="menu-item px-3">
                                                     <a data-bs-toggle="modal" data-bs-target="#modal_update_user"
-                                                        wire:click="show_modal('edit',{{ $category->id }})"
+                                                        wire:click="show_modal('edit',{{ $product->id }})"
                                                         class="menu-link px-3">Editar</a>
                                                 </div>
                                                 <div class="menu-item px-3">
-                                                    <a wire:click.prevent="deleteConfirmation({{ $category->id }})"
+                                                    <a wire:click.prevent="deleteConfirmation({{ $product->id }})"
                                                         class="menu-link px-3"
                                                         data-kt-users-table-filter="delete_row">eliminar</a>
                                                 </div>

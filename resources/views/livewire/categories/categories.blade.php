@@ -41,9 +41,7 @@
                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
                         <thead>
                             <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                                <th class="text-center min-w-125px">Nombre</th>
-                                <th class="text-center min-w-125px">Imagen</th>
-                                <th class="text-center min-w-125px">Descripción</th>
+                                <th class="text-center min-w-125px">Categoría</th>
                                 <th class="text-center min-w-125px">Fecha de registro</th>
                                 <th class="text-center min-w-125px">Fecha de actualización</th>
                                 <th class="text-center min-w-125px">Estado</th>
@@ -53,31 +51,41 @@
                         <tbody class=" text-center text-gray-600 fw-semibold">
                             @foreach ($categories as $category)
                                 <tr>
-                                    <td> {{ $category->name }}</td>
                                     <td>
-                                        @forelse  ($category->files as $file)
-                                            @if ($loop->last)
+                                        <div class="d-flex">
+                                            <!--begin::Thumbnail-->
+                                            @forelse  ($category->files as $file)
+                                                @if ($loop->last)
+                                                    <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                                        <a target="_blank"
+                                                            href="{{ asset('storage') }}/{{ $file->url }}">
+                                                            <div class="symbol-label">
+                                                                <img src="{{ asset('storage') }}/{{ $file->url }}"
+                                                                    alt="{{ $file->name }}" class="w-100" />
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                @endif
+                                            @empty
                                                 <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                                    <a target="_blank"
-                                                        href="{{ asset('storage') }}/{{ $file->url }}">
-                                                        <div class="symbol-label">
-                                                            <img src="{{ asset('storage') }}/{{ $file->url }}"
-                                                                alt="{{ $file->name }}" class="w-100" />
+                                                    <a>
+                                                        <div class="symbol-label fs-3  bg-light-success text-primary">
+                                                            {{ Str::upper(substr($category->name, 0, 1)) }}
                                                         </div>
                                                     </a>
                                                 </div>
-                                            @endif
-                                        @empty
-                                            <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                                <a>
-                                                    <div class="symbol-label fs-3  bg-light-success text-primary">
-                                                        {{ Str::upper(substr($category->name, 0, 1)) }}
-                                                    </div>
-                                                </a>
+                                            @endforelse
+                                            <!--end::Thumbnail-->
+                                            <div class="text-start ms-5">
+                                                <!--begin::Title-->
+                                                {{ $category->name }}
+                                                <!--end::Title-->
+                                                <!--begin::Description-->
+                                                <div class="text-muted fs-7 fw-bold">{{ $category->description}}</div>
+                                                <!--end::Description-->
                                             </div>
-                                        @endforelse
+                                        </div>
                                     </td>
-                                    <td>{{ $category->description }}</td>
                                     <td>
                                         <div class="badge badge-light fw-bold">
                                             {{ $category->created_at->diffForHumans() }}</div>

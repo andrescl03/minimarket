@@ -363,6 +363,22 @@
                                             <!--end::Description-->
                                         </div>
                                         <!--end::Input group-->
+                                    
+                                        <div class="mb-8 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="form-label">ganancia del producto</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" readonly name="price" class="form-control mb-2"
+                                                wire:model.defer="purcharse" />
+                                            <!--end::Input-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">Calculo automático entre el precio de compra y precio de venta sugerido.
+                                            </div>
+                                        
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
 
                                     </div>
                                     <!--end::Card header-->

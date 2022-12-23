@@ -98,9 +98,10 @@
     <script src="/assets/metronic/js/custom/widgets.js"></script>
     <script src="/assets/metronic/plugins/custom/formrepeater/formrepeater.bundle.js"></script>
     @livewireScripts
-    <script  src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     @stack('scripts')
+ 
 
 </body>
 

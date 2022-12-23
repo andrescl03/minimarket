@@ -1,8 +1,8 @@
 <div>
     @section('titulo')
-        <h2>Registro de nuevo producto</h2>
+    <h2>Registro de nuevo producto</h2>
     @endsection
-    <div x-data="" class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <div x-data="data()" class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
             <!--begin::Form-->
@@ -73,7 +73,7 @@
                             <div class="text-muted fs-7">Establezca la imagen en miniatura del producto. Solo imagen
                                 *.png, *.jpg y *.jpeg</div>
                             @error('photo')
-                                <span class="error text-danger">{{ $message }}</span>
+                            <span class="error text-danger">{{ $message }}</span>
                             @enderror
                             <!--end::Description-->
                         </div>
@@ -102,9 +102,10 @@
                         <div class="card-body pt-0">
                             <!--begin::Select2-->
                             <select class="form-select mb-2" data-control="select2" data-hide-search="true"
-                                data-placeholder="Seleccione una opción" id="kt_ecommerce_add_product_status_select" wire:model.defer="state">
+                                data-placeholder="Seleccione una opción" id="kt_ecommerce_add_product_status_select"
+                                wire:model.defer="state">
                                 @foreach ($states as $state)
-                                    <option value="{{ $state->id }}">{{ $state->name }}</option>
+                                <option value="{{ $state->id }}">{{ $state->name }}</option>
                                 @endforeach
                             </select>
                             <!--end::Select2-->
@@ -112,9 +113,9 @@
                             <div class="text-muted fs-7">Establezca el estado del producto.</div>
                             <!--end::Description-->
                             @error('state')
-                                <span class="error text-danger">{{ $message }}</span>
+                            <span class="error text-danger">{{ $message }}</span>
                             @enderror
-                           
+
                             <!--begin::Datepicker-->
                             <div class="d-none mt-10">
                                 <label for="kt_ecommerce_add_product_status_datepicker" class="form-label">Select
@@ -149,11 +150,11 @@
                                 data-placeholder="Seleccione una categoría">
                                 <option></option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
                             @error('category')
-                                <span class="error text-danger">{{ $message }}</span>
+                            <span class="error text-danger">{{ $message }}</span>
                             @enderror
                             <!--end::Select2-->
                             <!--begin::Description-->
@@ -166,10 +167,9 @@
                                 <span class="svg-icon svg-icon-2">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
-                                        <rect opacity="0.5" x="11" y="18" width="12" height="2"
-                                            rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
-                                        <rect x="6" y="11" width="12" height="2" rx="1"
-                                            fill="currentColor" />
+                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1"
+                                            transform="rotate(-90 11 18)" fill="currentColor" />
+                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
                                     </svg>
                                 </span>
                                 <!--end::Svg Icon-->Ver módulo de categorías
@@ -177,7 +177,7 @@
                             <!--end::Button-->
                             <!--begin::Input group-->
                             <!--begin::Label-->
-                           {{--  <label class="form-label d-block">Etiquetas</label>
+                            {{-- <label class="form-label d-block">Etiquetas</label>
                             <!--end::Label-->
                             <!--begin::Input-->
                             <input id="kt_ecommerce_add_product_tags" name="kt_ecommerce_add_product_tags"
@@ -215,8 +215,7 @@
                     <!--begin::Tab content-->
                     <div class="tab-content">
                         <!--begin::Tab pane-->
-                        <div class="tab-pane fade show active" id="kt_ecommerce_add_product_general"
-                            role="tab-panel">
+                        <div class="tab-pane fade show active" id="kt_ecommerce_add_product_general" role="tab-panel">
                             <div class="d-flex flex-column gap-7 gap-lg-10">
                                 <!--begin::General options-->
                                 <div class="card card-flush py-4">
@@ -243,7 +242,7 @@
                                                 recomienda que sea único.</div>
                                             <!--end::Description-->
                                             @error('name')
-                                                <span class="error text-danger">{{ $message }}</span>
+                                            <span class="error text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <!--end::Input group-->
@@ -253,7 +252,8 @@
                                             <label class="required form-label">Descripción del producto</label>
                                             <!--end::Label-->
                                             <!--begin::Editor-->
-                                            <textarea type="text" name="description" class="form-control mb-2" placeholder="Descripción del producto"
+                                            <textarea type="text" name="description" class="form-control mb-2"
+                                                placeholder="Descripción del producto"
                                                 wire:model.defer="description"></textarea>
                                             <!--end::Editor-->
                                             <!--begin::Description-->
@@ -261,7 +261,7 @@
                                                 para una mejor visibilidad.</div>
                                             <!--end::Description-->
                                             @error('description')
-                                                <span class="error text-danger">{{ $message }}</span>
+                                            <span class="error text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <!--end::Input group-->
@@ -293,7 +293,7 @@
                                             <div class="text-muted fs-7">Configure la galería multimedia del producto.
                                             </div>
                                             @error('files.*')
-                                                <span class="text-danger error">{{ $message }}</span>
+                                            <span class="text-danger error">{{ $message }}</span>
                                             @enderror
                                             <!--end::Description-->
                                         </div>
@@ -302,12 +302,12 @@
 
                                     <div class="card-body pt-0">
                                         @foreach ($files as $file)
-                                            <div
-                                                class="image-input image-input-empty image-input-outline image-input-placeholder mb-3">
-                                                <div class="image-input-wrapper w-150px h-150px "
-                                                    style="background-image: url({{ $file ? $file->temporaryUrl() : '' }});">
-                                                </div>
+                                        <div
+                                            class="image-input image-input-empty image-input-outline image-input-placeholder mb-3">
+                                            <div class="image-input-wrapper w-150px h-150px "
+                                                style="background-image: url({{ $file ? $file->temporaryUrl() : '' }});">
                                             </div>
+                                        </div>
                                         @endforeach
                                     </div>
 
@@ -331,8 +331,9 @@
                                             <label class="required form-label">Precio de compra</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="price" class="form-control mb-2"
-                                                placeholder="Precio de compra" wire:model.defer="sale_suggested" />
+                                            <input @click="calcularGanancia()" type="text" name="price"
+                                                class="form-control mb-2" placeholder="Precio de compra"
+                                                wire:model.defer="sale_suggested" />
 
                                             <!--end::Input-->
                                             <!--begin::Description-->
@@ -340,42 +341,36 @@
                                             </div>
                                             <!--end::Description-->
                                             @error('purcharse')
-                                                <span class="error text-danger">{{ $message }}</span>
+                                            <span class="error text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        
-                                        
+
+
                                         <div class="mb-8 fv-row">
-                                            <!--begin::Label-->
                                             <label class="required form-label">Precio de venta sugerido
                                                 para el público</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <input type="text" name="price" class="form-control mb-2"
-                                                placeholder="Precio de venta sugerido" wire:model.defer="purcharse" />
-                                            <!--end::Input-->
-                                            <!--begin::Description-->
+                                            <input @keyup.page-down="calcularGanancia()" type="text" name="price"
+                                                class="form-control mb-2" placeholder="Precio de venta sugerido"
+                                                wire:model.defer="purcharse" />
                                             <div class="text-muted fs-7">Establecer el precio sugerido del producto.
                                             </div>
                                             @error('sale_suggested')
-                                                <span class="error text-danger">{{ $message }}</span>
+                                            <span class="error text-danger">{{ $message }}</span>
                                             @enderror
-                                            <!--end::Description-->
                                         </div>
-                                        <!--end::Input group-->
-                                    
+
                                         <div class="mb-8 fv-row">
                                             <!--begin::Label-->
                                             <label class="form-label">ganancia del producto</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" readonly name="price" class="form-control mb-2"
-                                                wire:model.defer="purcharse" />
+                                            <input type="text" readonly class="form-control mb-2" />
                                             <!--end::Input-->
                                             <!--begin::Description-->
-                                            <div class="text-muted fs-7">Calculo automático entre el precio de compra y precio de venta sugerido.
+                                            <div class="text-muted fs-7">Calculo automático entre el precio de compra y
+                                                precio de venta sugerido.
                                             </div>
-                                        
+
                                             <!--end::Description-->
                                         </div>
                                         <!--end::Input group-->
@@ -413,12 +408,12 @@
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Ingrese el SKU del producto.</div>
                                             @error('sku')
-                                                <span class="error text-danger">{{ $message }}</span>
+                                            <span class="error text-danger">{{ $message }}</span>
                                             @enderror
                                             <!--end::Description-->
                                         </div>
                                         <!--end::Input group-->
-                                         <!--begin::Input group-->
+                                        <!--begin::Input group-->
                                         <div class="mb-10 fv-row">
                                             <!--begin::Label-->
                                             <label class="required form-label">Cantidad</label>
@@ -427,7 +422,7 @@
                                             <div class="d-flex gap-3">
                                                 <input type="number" name="shelf" class="form-control mb-2"
                                                     placeholder="En tienda" wire:model.defer="stock" />
-                                                {{--   <input type="number" name="warehouse" class="form-control mb-2"
+                                                {{-- <input type="number" name="warehouse" class="form-control mb-2"
                                                     placeholder="In warehouse" /> --}}
                                             </div>
                                             <!--end::Input-->
@@ -435,7 +430,7 @@
                                             <div class="text-muted fs-7">Ingrese la cantidad del producto.</div>
                                             <!--end::Description-->
                                             @error('stock')
-                                                <span class="error text-danger">{{ $message }}</span>
+                                            <span class="error text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <!--end::Input group-->
@@ -475,8 +470,8 @@
                                                                     data-kt-ecommerce-catalog-add-product="product_option">
                                                                     <option></option>
                                                                     @foreach ($type_variations as $type_variation)
-                                                                        <option value="{{ $type_variation->id }}">
-                                                                            {{ $type_variation->name }}</option>
+                                                                    <option value="{{ $type_variation->id }}">
+                                                                        {{ $type_variation->name }}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -489,17 +484,14 @@
                                                                 class="btn btn-sm btn-icon btn-light-danger">
                                                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr088.svg-->
                                                                 <span class="svg-icon svg-icon-1">
-                                                                    <svg width="24" height="24"
-                                                                        viewBox="0 0 24 24" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <rect opacity="0.5" x="7.05025"
-                                                                            y="15.5356" width="12"
-                                                                            height="2" rx="1"
+                                                                    <svg width="24" height="24" viewBox="0 0 24 24"
+                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <rect opacity="0.5" x="7.05025" y="15.5356"
+                                                                            width="12" height="2" rx="1"
                                                                             transform="rotate(-45 7.05025 15.5356)"
                                                                             fill="currentColor" />
-                                                                        <rect x="8.46447" y="7.05029"
-                                                                            width="12" height="2"
-                                                                            rx="1"
+                                                                        <rect x="8.46447" y="7.05029" width="12"
+                                                                            height="2" rx="1"
                                                                             transform="rotate(45 8.46447 7.05029)"
                                                                             fill="currentColor" />
                                                                     </svg>
@@ -516,14 +508,12 @@
                                                         data-repeater-create="" class="btn btn-sm btn-light-primary">
                                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
                                                         <span class="svg-icon svg-icon-2">
-                                                            <svg width="24" height="24" viewBox="0 0 24 24"
-                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <rect opacity="0.5" x="11" y="18"
-                                                                    width="12" height="2" rx="1"
-                                                                    transform="rotate(-90 11 18)"
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <rect opacity="0.5" x="11" y="18" width="12" height="2"
+                                                                    rx="1" transform="rotate(-90 11 18)"
                                                                     fill="currentColor" />
-                                                                <rect x="6" y="11" width="12"
-                                                                    height="2" rx="1"
+                                                                <rect x="6" y="11" width="12" height="2" rx="1"
                                                                     fill="currentColor" />
                                                             </svg>
                                                         </span>
@@ -567,7 +557,7 @@
                                             <div class="text-muted fs-7">Envío a domicilio a través de RAPPI,
                                                 PedidosYa, Etc.</div>
                                             @error('delivery')
-                                                <span class="error text-danger">{{ $message }}</span>
+                                            <span class="error text-danger">{{ $message }}</span>
                                             @enderror
                                             <!--end::Description-->
                                         </div>
@@ -585,8 +575,8 @@
                     <!--end::Tab content-->
                     <div class="d-flex justify-content-end">
                         <!--begin::Button-->
-                        <a {{-- href="{{ route('products.index') }}" --}} wire:click="click" id="kt_ecommerce_add_product_cancel"
-                            class="btn btn-light me-5">Cancelar</a>
+                        <a {{-- href="{{ route('products.index') }}" --}} wire:click="click"
+                            id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancelar</a>
                         <!--end::Button-->
                         <!--begin::Button-->
                         <button @click="addSelectVariation()" id="kt_ecommerce_add_product_submit" type="submit"
@@ -605,12 +595,20 @@
         <!--end::Container-->
     </div>
     @push('scripts')
-        @vite('resources/js/products/create-product.js')
-        <script>
-            function addSelectVariation() {
-                @this.set('type_variation', $('#kt_ecommerce_add_product_options').repeaterVal())
-            }
+    @vite('resources/js/products/create-product.js')
+    <script>
+        function data(){
+                return {
+                    calcularGanancia(){
 
+                       
+                    }
+                    addSelectVariation() {
+                        @this.set('type_variation', $('#kt_ecommerce_add_product_options').repeaterVal())
+                    }
+                }
+            }
+          
             window.addEventListener('show-notification', event => {
 
                 Swal.fire({
@@ -635,13 +633,9 @@
                             "warning"
                         )
                         window.location.href = "{{ route('products.index') }}";
-
-
                     }
                 });
-
-
             });
-        </script>
+    </script>
     @endpush
 </div>

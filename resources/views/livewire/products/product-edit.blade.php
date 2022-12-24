@@ -37,9 +37,9 @@
                             <!--end::Image input placeholder-->
                             <div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3">
                                 <!--begin::Preview existing avatar-->
-                                <div class="image-input-wrapper w-150px h-150px"
-                                    style="background-image: url({{ $photo ? $photo->temporaryUrl() : '' }});">
-                                </div>
+                              {{--   <div class="image-input-wrapper w-150px h-150px"
+                                    style="background-image: url({{ $product->photo ? $product->photo->temporaryUrl() : '' }});">
+                                </div> --}}
                                 <!--end::Preview existing avatar-->
                                 <!--begin::Label-->
                                 <label
@@ -104,9 +104,9 @@
                             <select class="form-select mb-2" data-control="select2" data-hide-search="true"
                                 data-placeholder="Seleccione una opción" id="kt_ecommerce_add_product_status_select"
                                 wire:model.defer="state">
-                                @foreach ($states as $state)
+                               {{--  @foreach ($states as $state)
                                 <option value="{{ $state->id }}">{{ $state->name }}</option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                             <!--end::Select2-->
                             <!--begin::Description-->
@@ -149,9 +149,9 @@
                             <select class="form-select mb-2" wire:model.defer="category" data-control="select2"
                                 data-placeholder="Seleccione una categoría">
                                 <option>Seleccione</option>
-                                @foreach ($categories as $category)
+                              {{--   @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                             @error('category')
                             <span class="error text-danger">{{ $message }}</span>
@@ -235,7 +235,8 @@
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <input type="text" name="product_name" class="form-control mb-2"
-                                                placeholder="Nombre del producto" wire:model.defer="name" />
+                                                placeholder="Nombre del producto" wire:model.defer="product.name" />
+
                                             <!--end::Input-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Se requiere un nombre de producto y se
@@ -282,12 +283,12 @@
                                     <div class="card-body pt-0">
                                         <!--begin::Input group-->
                                         <div class="fv-row mb-2">
-                                            <input accept=".png, .jpg, .jpeg" type="file" class="form-control"
-                                                wire:model.defer="files" multiple>
-                                            <div wire:loading wire:target="files">
+                                           {{--  <input accept=".png, .jpg, .jpeg" type="file" class="form-control"
+                                                wire:model.defer="files" multiple> --}}
+                                           {{--  <div wire:loading wire:target="files">
                                                 <span class="text-success">Cargando
                                                     imágenes...</span>
-                                            </div>
+                                            </div> --}}
 
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Configure la galería multimedia del producto.
@@ -301,14 +302,14 @@
                                     </div>
 
                                     <div class="card-body pt-0">
-                                        @foreach ($files as $file)
+                                        {{-- @foreach ($files as $file)
                                         <div
                                             class="image-input image-input-empty image-input-outline image-input-placeholder mb-3">
                                             <div class="image-input-wrapper w-150px h-150px "
                                                 style="background-image: url({{ $file ? $file->temporaryUrl() : '' }});">
                                             </div>
                                         </div>
-                                        @endforeach
+                                        @endforeach --}}
                                     </div>
 
                                     <!--end::Card header-->
@@ -471,10 +472,10 @@
                                                                     data-placeholder="Seleccione una variación  "
                                                                     data-kt-ecommerce-catalog-add-product="product_option">
                                                                     <option></option>
-                                                                    @foreach ($type_variations as $type_variation)
+                                                                  {{--   @foreach ($type_variations as $type_variation)
                                                                     <option value="{{ $type_variation->id }}">
                                                                         {{ $type_variation->name }}</option>
-                                                                    @endforeach
+                                                                    @endforeach --}}
                                                                 </select>
                                                             </div>
                                                             <!--end::Select2-->

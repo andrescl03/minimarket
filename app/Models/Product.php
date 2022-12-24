@@ -20,6 +20,7 @@ class Product extends Model
         'slug',
         'photo',
         'delivery',
+        'margin_of_gain',
         'category_id',
         'state_id'
     ];

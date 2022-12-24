@@ -2,15 +2,16 @@
 
 namespace App\Http\Livewire\Products;
 
+use App\Models\File;
+use App\Models\State;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
-use App\Models\File;
-use App\Models\State;
-use App\Models\TypeVariation;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use App\Models\TypeVariation;
 use Livewire\WithFileUploads;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Validator;
 
 class ProductCreate extends Component
 {
@@ -23,6 +24,7 @@ class ProductCreate extends Component
     public $sku;
     public $description;
     public $purcharse;
+    public $margin_of_gain;
     public $sale_suggested;
     public $stock;
     public $state = 1;
@@ -33,8 +35,6 @@ class ProductCreate extends Component
     public $states;
     public $type_variations;
 
-    protected $listeners = ['click'];
-
     private function resetInput()
     {
         $this->photo = null;
@@ -44,6 +44,7 @@ class ProductCreate extends Component
         $this->purcharse = null;
         $this->sale_suggested = null;
         $this->stock = null;
+        $this->margin_of_gain = null;
         $this->category = null;
         $this->delivery = 0;
         $this->files = [];
@@ -110,12 +111,16 @@ class ProductCreate extends Component
             ]
         );
 
+
         if ($validator->fails()) {
             $this->dispatchBrowserEvent('show-message');
         }
         $validator->validate();
 
         $path_url = $this->photo->store('photos');
+
+        Image::make(storage_path('app/' . $path_url))->resize(500, 500)->save();
+
         $product = Product::create(
             [
                 'name' => $this->name,
@@ -123,6 +128,7 @@ class ProductCreate extends Component
                 'purcharse' => $this->purcharse,
                 'slug' => Str::slug($this->name),
                 'sale_suggested' => $this->sale_suggested,
+                'margin_of_gain' => $this->margin_of_gain,
                 'photo' => $path_url,
                 'sku' => $this->sku,
                 'stock' => $this->stock,
@@ -138,7 +144,11 @@ class ProductCreate extends Component
             }
         }
         foreach ($this->files as  $file) {
+
             $fileUPload = $file->store('photos');
+
+            Image::make(storage_path('app/' . $fileUPload))->resize(500, 500)->save();
+
             $file = File::create(
                 [
                     'name' => $file->getClientOriginalName(),

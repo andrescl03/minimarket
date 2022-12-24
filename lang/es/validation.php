@@ -156,7 +156,7 @@ return [
             'rule-name' => 'custom-message',
         ],
     ],
-
+   
     /*
     |--------------------------------------------------------------------------
     | Atributos de validación personalizados
@@ -168,6 +168,15 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => 'nombre',
+        'description' => 'descripción',
+        'photo' => 'foto',
+        'purcharse' => 'precio de compra',
+        'sale_suggested' => 'precio de venta',
+        'stock' => 'cantidad',
+        'category' => 'categoría'
+
+    ],
 
 ];

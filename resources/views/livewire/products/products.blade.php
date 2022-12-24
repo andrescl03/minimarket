@@ -1,4 +1,4 @@
-<div>
+<div x-data="data()">
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <div id="kt_content_container" class="container-xxl">
             <div class="card">
@@ -82,8 +82,7 @@
                                     <td>{{ $product->sku }}</td>
                                     <td>{{ $product->sale_suggested }}</td>
                                     <td>{{ $product->purcharse }}</td>
-                                    @if ($product->stock <= 5)
-                                     <td>
+                                    @if ($product->stock <= 5) <td>
                                         <span class="badge badge-light-warning">Bajo stock</span>
                                         <span class="fw-bold text-warning ms-3">{{ $product->stock }}</span>
                                         </td>
@@ -137,12 +136,11 @@
                                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4"
                                                 data-kt-menu="true">
                                                 <div class="menu-item px-3">
-                                                    <a data-bs-toggle="modal" data-bs-target="#modal_update_user"
-                                                        wire:click="show_modal('edit',{{ $product->id }})"
+                                                    <a href="{{route('product.edit', ['product' => $product->slug])}}"
                                                         class="menu-link px-3">Editar</a>
                                                 </div>
                                                 <div class="menu-item px-3">
-                                                    <a wire:click.prevent="deleteConfirmation({{ $product->id }})"
+                                                    <a @click="deleteConfirmation({{ $product->id }})"
                                                         class="menu-link px-3"
                                                         data-kt-users-table-filter="delete_row">eliminar</a>
                                                 </div>
@@ -160,4 +158,32 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+    <script>
+        function data(){
+                return {
+                    deleteConfirmation: function (id){
+                        Swal.fire({
+                            title: "Eliminar",
+                            text: "¿Está seguro que desea eliminar el usuario?",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonText: "Sí, eliminar!"
+                            }).then(function(result) {
+                                    if (result.value) {
+                                 Livewire.emit('delete-product',id);
+                                 }
+                             });
+                    },
+                    
+                 }
+            }
+
+            window.addEventListener('show-notification-destroy', event => {
+                Swal.fire("INFORMACIÓN", event.detail.title, "success");
+            });
+    </script>
+    @endpush
+
 </div>

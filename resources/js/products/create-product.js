@@ -1,9 +1,11 @@
 "use strict";
 
 // Class definition
+
+
 var KTAppEcommerceSaveProduct = function () {
 
-    
+
     // Private functions
 
     // Init quill editor
@@ -113,7 +115,7 @@ var KTAppEcommerceSaveProduct = function () {
             }
         });
     }
- 
+
 
     // Category status handler
     const handleStatus = () => {
@@ -149,7 +151,7 @@ var KTAppEcommerceSaveProduct = function () {
                     hideDatepicker();
                     break;
                 }
-           
+
                 default:
                     break;
             }
@@ -174,7 +176,7 @@ var KTAppEcommerceSaveProduct = function () {
         }
     }
 
- 
+
     // Public methods
     return {
         init: function () {
@@ -193,9 +195,36 @@ var KTAppEcommerceSaveProduct = function () {
 KTUtil.onDOMContentLoaded(function () {
     KTAppEcommerceSaveProduct.init();
 
-     
+
 });
 
+
+window.addEventListener('show-notification', event => {
+    Swal.fire({
+        title: event.detail.title,
+        text: '¿Desea registrar otro producto?',
+        icon: "success",
+        showCancelButton: true,
+        confirmButtonText: "Sí, continuar registrando otro producto",
+        cancelButtonText: "No, regresar a la lista de productos",
+        reverseButtons: true
+    }).then(function (result) {
+        if (result.value) {
+            Swal.fire(
+                "IMPORTANTE",
+                "Por favor, ingrese nuevamente los campos solicitados para registrar.",
+                "success"
+            )
+        } else if (result.dismiss === "cancel") {
+            Swal.fire(
+                "saliendo...",
+                "Regresando al listado de productos",
+                "warning"
+            )
+            window.location.href = route('products.index');
+        }
+    });
+});
 
 window.addEventListener('show-message', event => {
 
@@ -205,17 +234,12 @@ window.addEventListener('show-message', event => {
         title: "ERROR",
         html: "Lo sentimos, parece que se han detectado algunos errores, inténtalo de nuevo. <br/><br/>Tenga en cuenta que puede haber errores en las pestañas <strong>General</strong> o <strong>Avanzado</strong>",
         icon: "error",
-          customClass: {
-                    confirmButton: "btn btn-primary"
-                }
+        customClass: {
+            confirmButton: "btn btn-primary"
+        }
     });
 
 });
 
 
-window.addEventListener('show', event => {
-
-  console.log(event.detail.data);
-
-});
 

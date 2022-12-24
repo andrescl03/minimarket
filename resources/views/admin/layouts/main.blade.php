@@ -19,9 +19,12 @@
     <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
 
+    @routes
     <link href="/assets/metronic/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
     <link href="/assets/metronic/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
     <link href="/assets/metronic/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
     @livewireStyles
     @vite(['resources/css/app.scss', 'resources/js/app.js'])
 
@@ -98,10 +101,9 @@
     <script src="/assets/metronic/js/custom/widgets.js"></script>
     <script src="/assets/metronic/plugins/custom/formrepeater/formrepeater.bundle.js"></script>
     @livewireScripts
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     @stack('scripts')
- 
+
 
 </body>
 

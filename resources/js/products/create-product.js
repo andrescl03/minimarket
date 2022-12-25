@@ -221,7 +221,7 @@ window.addEventListener('show-notification', event => {
                 "Regresando al listado de productos",
                 "warning"
             )
-            window.location.href = route('products.index');
+            window.location.href = route('productos.index');
         }
     });
 });

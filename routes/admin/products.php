@@ -4,7 +4,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Livewire\Products\ProductCreate;
 use App\Http\Livewire\Products\ProductEdit;
 
-   Route::get('products/create',ProductCreate::class)->name('products.create');
-   Route::resource('products', ProductController::class, ['only'=> ['index']]);
-   Route::get('product/edit/{product:slug}', ProductEdit::class)->name('product.edit');
+   Route::get('producto/crear',ProductCreate::class)->name('product.create');
+   Route::resource('productos', ProductController::class, ['only'=> ['index']]);
+   Route::get('producto/editar/{product:slug}', ProductEdit::class)->name('product.edit');
 

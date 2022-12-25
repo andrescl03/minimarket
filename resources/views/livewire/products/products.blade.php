@@ -21,7 +21,7 @@
                     </div>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                            <a href="{{ route('products.create') }}" type="button" class="btn btn-success">
+                            <a href="{{ route('product.create') }}" type="button" class="btn btn-success">
                                 <span class="svg-icon svg-icon-2">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">

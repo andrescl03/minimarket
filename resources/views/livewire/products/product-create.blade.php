@@ -331,7 +331,7 @@
                                             <label class="required form-label">Precio de compra</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="number" min="0" max="1000" step="1" @keyup="calcularGanancia()"
+                                            <input type="number" min="0" max="1000" step="0.01" @keyup="calcularGanancia()"
                                                 name="purcharse" class="form-control mb-2"
                                                 placeholder="Precio de compra"
                                                 x-model="purcharse" />
@@ -350,7 +350,7 @@
                                         <div class="mb-8 fv-row">
                                             <label class="required form-label">Precio de venta sugerido
                                                 para el público</label>
-                                            <input type="number" min="0" max="1000" step="1" @keyup="calcularGanancia()"
+                                            <input type="number" min="0" max="1000" step="0.01" @keyup="calcularGanancia()"
                                                 name="sale_suggested" class="form-control mb-2"
                                                 placeholder="Precio de venta sugerido"  x-model="sale_suggested" />
                                             <div class="text-muted fs-7">Establecer el precio sugerido del producto.
@@ -606,7 +606,7 @@
                     margin_of_gain :  @entangle('margin_of_gain').defer,
                     calcularGanancia(){
                         if(this.purcharse != null && this.sale_suggested != null){
-                            let margin =  this.purcharse - this.sale_suggested;
+                            let margin =  this.sale_suggested  - this.purcharse ;
                             if(margin<= 0){
                                 this.margin_of_gain = 0.00;
                             }

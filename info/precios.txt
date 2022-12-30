@@ -1,0 +1,105 @@
+avena 3 ositos
+precio: 20
+cantidad: 24
+precio de  compra: 0.84
+precio de venta: 1.30
+----------------------------------
+
+Ajinomen 
+precio: 27.50 
+cantidad: 24
+precio de compra : 1.14
+precio de venta: 1.50
+---------------------------------
+
+ 
+paracas de 4 rollos 
+precio: 38 soles
+cantidad : 6
+precio de compra: 6.33
+precio de venta: 7.50
+----------------------------------
+
+papel elite de 4 rollos:
+precio:39 soles
+cantidad:12
+precio de compra: 3.25
+precio de venta: 4.00 
+---------------------------------
+
+FALTA
+
+papel elite de 2 rollos:
+precio: 18 soles
+cantidad:
+precio de compra:
+precio de venta: 2.50
+
+-------------------------------
+
+te surtido
+precio:32 soles
+cantidad: 32
+precio de compra: 1 
+precio de venta: 
+1.50
+--------------------------------
+cocoa 60gr winter
+precio: 17 soles
+cantidad: 20
+precio compra: 0.85
+precio de venta:
+-------------------------------
+
+
+sillao pequeño 85ml 
+precio : 4.50
+cantidad: 6
+precio de compra: 0.75
+precio de venta: 1.20
+---------------------------------
+
+sillao grande 160ml
+precio: 7.00
+cantidad: 6
+precio de compra: 1.16
+precio de venta : 1.80
+---------------------------------
+
+FALTA
+ajinamoto 62gr
+precio:25
+cantidad:
+precio de compra:
+precio de venta:
+-------------------------------------
+
+
+
+
+sal marina
+precio:29.50
+cantidad: 25
+precio de compra: 1.18
+precio de venta: 1.70
+
+----------------------------------------
+
+oregano
+precio: 4.50
+cantidad: 15
+precio de compra: 0.30
+precio de venta: 0.50
+-------------------------------------------------
+
+canela grande en tira:
+precio: 9
+cantidad: 15
+precio de compra: 0.6
+precio de venta: 1
+--------------------------------------------------
+canela pequeña:
+precio: 4.50
+cantidad: 15
+precio de compra:0.30
+precio de venta: 0.50

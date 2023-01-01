@@ -1,4 +1,4 @@
-<div x-data="data()" >
+<div x-data="data()">
     @section('titulo')
     <h2>Registro de nuevo producto</h2>
     @endsection
@@ -37,9 +37,20 @@
                             <!--end::Image input placeholder-->
                             <div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3">
                                 <!--begin::Preview existing avatar-->
-                              {{--   <div class="image-input-wrapper w-150px h-150px"
-                                    style="background-image: url({{ $product->photo ? $product->photo->temporaryUrl() : '' }});">
-                                </div> --}}
+                                @if($photo)
+                                @if($imageUpdateTemporary)
+                                <div class="image-input-wrapper w-150px h-150px"
+                                    style="background-image: url({{ $photo->temporaryUrl() }});">
+                                </div>
+                                @else
+                                <div class="image-input-wrapper w-150px h-150px"
+                                    style="background-image: url({{ asset('storage') }}/{{ $photo }}">
+                                </div>
+                                @endif
+                                @else
+                                <div class="image-input-wrapper w-150px h-150px">
+                                </div>
+                                @endif
                                 <!--end::Preview existing avatar-->
                                 <!--begin::Label-->
                                 <label
@@ -104,9 +115,9 @@
                             <select class="form-select mb-2" data-control="select2" data-hide-search="true"
                                 data-placeholder="Seleccione una opción" id="kt_ecommerce_add_product_status_select"
                                 wire:model.defer="state">
-                               {{--  @foreach ($states as $state)
+                                @foreach ($states as $state)
                                 <option value="{{ $state->id }}">{{ $state->name }}</option>
-                                @endforeach --}}
+                                @endforeach
                             </select>
                             <!--end::Select2-->
                             <!--begin::Description-->
@@ -146,12 +157,12 @@
                             <label class="form-label">Categoría</label>
                             <!--end::Label-->
                             <!--begin::Select2-->
-                            <select class="form-select mb-2" wire:model.defer="category" data-control="select2"
+                            <select class="form-select mb-2" wire:model.defer="category_id" data-control="select2"
                                 data-placeholder="Seleccione una categoría">
                                 <option>Seleccione</option>
-                              {{--   @foreach ($categories as $category)
+                                @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach --}}
+                                @endforeach
                             </select>
                             @error('category')
                             <span class="error text-danger">{{ $message }}</span>
@@ -235,7 +246,7 @@
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <input type="text" name="product_name" class="form-control mb-2"
-                                                placeholder="Nombre del producto" wire:model.defer="product.name" />
+                                                placeholder="Nombre del producto" wire:model.defer="name" />
 
                                             <!--end::Input-->
                                             <!--begin::Description-->
@@ -283,9 +294,9 @@
                                     <div class="card-body pt-0">
                                         <!--begin::Input group-->
                                         <div class="fv-row mb-2">
-                                           {{--  <input accept=".png, .jpg, .jpeg" type="file" class="form-control"
+                                            {{-- <input accept=".png, .jpg, .jpeg" type="file" class="form-control"
                                                 wire:model.defer="files" multiple> --}}
-                                           {{--  <div wire:loading wire:target="files">
+                                            {{-- <div wire:loading wire:target="files">
                                                 <span class="text-success">Cargando
                                                     imágenes...</span>
                                             </div> --}}
@@ -334,8 +345,7 @@
                                             <!--begin::Input-->
                                             <input type="number" min="0" max="1000" step="1" @keyup="calcularGanancia()"
                                                 name="purcharse" class="form-control mb-2"
-                                                placeholder="Precio de compra"
-                                                x-model="purcharse" />
+                                                placeholder="Precio de compra" x-model="purcharse" />
 
                                             <!--end::Input-->
                                             <!--begin::Description-->
@@ -353,7 +363,7 @@
                                                 para el público</label>
                                             <input type="number" min="0" max="1000" step="1" @keyup="calcularGanancia()"
                                                 name="sale_suggested" class="form-control mb-2"
-                                                placeholder="Precio de venta sugerido"  x-model="sale_suggested" />
+                                                placeholder="Precio de venta sugerido" x-model="sale_suggested" />
                                             <div class="text-muted fs-7">Establecer el precio sugerido del producto.
                                             </div>
                                             @error('sale_suggested')
@@ -366,8 +376,8 @@
                                             <label class="form-label">ganancia del producto</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input wire.model.defer="margin_of_gain" x-model="margin_of_gain"
-                                                type="text" readonly class="form-control mb-2" />
+                                            <input x-model="margin_of_gain" type="text" readonly
+                                                class="form-control mb-2" />
                                             <!--end::Input-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Calculo automático entre el precio de compra y
@@ -472,10 +482,10 @@
                                                                     data-placeholder="Seleccione una variación  "
                                                                     data-kt-ecommerce-catalog-add-product="product_option">
                                                                     <option></option>
-                                                                  {{--   @foreach ($type_variations as $type_variation)
+                                                                    @foreach ($type_variations as $type_variation)
                                                                     <option value="{{ $type_variation->id }}">
                                                                         {{ $type_variation->name }}</option>
-                                                                    @endforeach --}}
+                                                                    @endforeach
                                                                 </select>
                                                             </div>
                                                             <!--end::Select2-->
@@ -507,8 +517,8 @@
                                                 <!--end::Form group-->
                                                 <!--begin::Form group-->
                                                 <div class="form-group mt-5">
-                                                    <button {{-- @click="addSelectVariation()" --}} type="button"
-                                                        data-repeater-create="" class="btn btn-sm btn-light-primary">
+                                                    <button type="button" data-repeater-create=""
+                                                        class="btn btn-sm btn-light-primary">
                                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
                                                         <span class="svg-icon svg-icon-2">
                                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -578,8 +588,8 @@
                     <!--end::Tab content-->
                     <div class="d-flex justify-content-end">
                         <!--begin::Button-->
-                        <a {{-- href="{{ route('products.index') }}" --}} wire:click="click"
-                            id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancelar</a>
+                        <a href="{{route('productos.index')}}" id="kt_ecommerce_add_product_cancel"
+                            class="btn btn-light me-5">Cancelar</a>
                         <!--end::Button-->
                         <!--begin::Button-->
                         <button @click="addSelectVariation()" id="kt_ecommerce_add_product_submit" type="submit"
@@ -607,7 +617,7 @@
                     margin_of_gain :  @entangle('margin_of_gain').defer,
                     calcularGanancia(){
                         if(this.purcharse != null && this.sale_suggested != null){
-                            let margin =  this.purcharse - this.sale_suggested;
+                            let margin =  this.sale_suggested - this.purcharse;
                             if(margin<= 0){
                                 this.margin_of_gain = 0.00;
                             }

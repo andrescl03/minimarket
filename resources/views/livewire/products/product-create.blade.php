@@ -506,7 +506,7 @@
                                                 <!--end::Form group-->
                                                 <!--begin::Form group-->
                                                 <div class="form-group mt-5">
-                                                    <button {{-- @click="addSelectVariation()" --}} type="button"
+                                                    <button type="button"
                                                         data-repeater-create="" class="btn btn-sm btn-light-primary">
                                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
                                                         <span class="svg-icon svg-icon-2">

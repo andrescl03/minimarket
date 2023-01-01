@@ -19,4 +19,11 @@ class Category extends Model
     {
         return $this->BelongsToMany(File::class, 'files_modules')->withTimestamps();
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+
 }

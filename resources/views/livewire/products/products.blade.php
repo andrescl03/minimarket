@@ -43,8 +43,8 @@
                                     <th class="text-center min-w-100px">Nombre</th>
                                     <th class="text-center min-w-100px">Imagen</th>
                                     <th class="text-center min-w-100px">SKU</th>
-                                    <th class="text-center min-w-100px">Precio de venta sugerido</th>
                                     <th class="text-center min-w-100px">Precio de compra</th>
+                                    <th class="text-center min-w-100px">Precio de venta sugerido</th>
                                     <th class="text-center min-w-100px">Cantidad disponible</th>
                                     <th class="text-center min-w-100px">Categoría</th>
                                     <th class="text-center min-w-100px">Fecha de registro</th>
@@ -80,8 +80,9 @@
                                         @endif
                                     </td>
                                     <td>{{ $product->sku }}</td>
-                                    <td>{{ $product->sale_suggested }}</td>
-                                    <td>{{ $product->purcharse }}</td>
+                                    <td>S/. {{ $product->purcharse }}</td>
+                                    <td>S/. {{ $product->sale_suggested }}</td>
+
                                     @if ($product->stock <= 5) <td>
                                         <span class="badge badge-light-warning">Bajo stock</span>
                                         <span class="fw-bold text-warning ms-3">{{ $product->stock }}</span>

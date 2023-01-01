@@ -1,13 +1,9 @@
 "use strict";
 
 // Class definition
-
-
 var KTAppEcommerceSaveProduct = function () {
 
-
     // Private functions
-
     // Init quill editor
     const initQuill = () => {
         // Define all elements for quill editor
@@ -15,7 +11,6 @@ var KTAppEcommerceSaveProduct = function () {
             '#kt_ecommerce_add_product_description',
             '#kt_ecommerce_add_product_meta_description'
         ];
-
         // Loop all elements
         elements.forEach(element => {
             // Get quill element
